@@ -2,6 +2,7 @@
 
 int check_cycle(listint_t *list)
 {
+#if 0
 	int checked_nodes = 0, i = 0;
 	listint_t *node, *node_checked;
 
@@ -20,6 +21,23 @@ int check_cycle(listint_t *list)
 		}
 		checked_nodes++;
 		node = node->next;
+	}
+#endif
+	listint_t *gogo, *go;
+
+	if (list == NULL)
+		return (0);
+
+	go = gogo = list;
+	while (gogo != NULL)
+	{
+		go = go->next;
+		gogo = gogo->next;
+		if (gogo != NULL)
+			gogo = gogo->next;
+
+		if (go == gogo)
+			return (1);
 	}
 	return (0);
 }
