@@ -25,16 +25,15 @@ int check_cycle(listint_t *list)
 #endif
 	listint_t *gogo, *go;
 
-	if (list == NULL)
-		return (0);
-
 	go = gogo = list;
 	while (gogo != NULL)
 	{
-		go = go->next;
 		gogo = gogo->next;
 		if (gogo != NULL)
+		{
+			go = go->next;
 			gogo = gogo->next;
+		}
 
 		if (go == gogo)
 			return (1);
