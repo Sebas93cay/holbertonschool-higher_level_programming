@@ -8,6 +8,5 @@ def magic_calculation(a, b):
         return c
     else:
         return (sub(a, b))
-
-import dis
-dis.dis(magic_calculation)
+# import dis
+# dis.dis(magic_calculation)
