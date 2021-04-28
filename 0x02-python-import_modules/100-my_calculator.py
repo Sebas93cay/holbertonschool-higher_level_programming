@@ -12,7 +12,7 @@ if __name__ == '__main__':
         exit(1)
 
     from calculator_1 import add, sub, mul, div
-    
+
     switch_operador = {
         '+': add,
         '-': sub,
