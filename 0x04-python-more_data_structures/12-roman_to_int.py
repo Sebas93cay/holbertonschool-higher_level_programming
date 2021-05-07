@@ -9,9 +9,7 @@ def roman_to_int(roman_string):
     for i in range(lenght):
         mul = 1
         if (i is not lenght - 1):
-            if ((s[i] is 'C' and s[i + 1] in ['D', 'M']) or
-                    (s[i] is 'X' and s[i + 1] in ['L', 'C']) or
-                    (s[i] is 'I' and s[i + 1] in ['V', 'X'])):
+            if (letras[s[i]] < letras[s[i+1]]):
                 mul = -1
         numero += mul * letras[s[i]]
     return numero
