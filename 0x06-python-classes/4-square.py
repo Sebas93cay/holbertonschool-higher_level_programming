@@ -1,5 +1,10 @@
 #!/usr/bin/python3
+"""Square 4 class"""
+
+
 class Square:
+    """Square class"""
+
     def __init__(self, value=0):
         if (isinstance(value, int) is False):
             raise TypeError("size must be an integer")
