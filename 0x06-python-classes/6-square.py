@@ -12,6 +12,29 @@ class Square:
         if (size < 0):
             raise ValueError("size must be >= 0")
         self.__size = size
+        good_pos = True
+        while (good_pos):
+            if type(position) is not tuple:
+
+                good_pos = False
+                break
+            if len(position) is not 2:
+
+                good_pos = False
+                break
+            if ((type(position[0]) is not int) or
+                    (type(position[1]) is not int)):
+
+                good_pos = False
+                break
+            if (position[0] < 0 or position[1] < 0):
+
+                good_pos = False
+                break
+            break
+        if good_pos is not True:
+            raise TypeError("position must be a tuple of 2 positive integers")
+
         self.__position = position
 
     def area(self):
@@ -53,27 +76,26 @@ class Square:
     @position.setter
     def position(self, value):
         """set the __position"""
-        good_value = True
-
-        while (good_value):
+        good_pos = True
+        while (good_pos):
             if type(value) is not tuple:
 
-                good_value = False
+                good_pos = False
                 break
             if len(value) is not 2:
 
-                good_value = False
+                good_pos = False
                 break
             if ((type(value[0]) is not int) or
                     (type(value[1]) is not int)):
 
-                good_value = False
+                good_pos = False
                 break
             if (value[0] < 0 or value[1] < 0):
 
-                good_value = False
+                good_pos = False
                 break
             break
-        if good_value is not True:
+        if good_pos is not True:
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
