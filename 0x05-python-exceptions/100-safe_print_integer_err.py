@@ -2,8 +2,6 @@
 def safe_print_integer_err(value):
     import sys
 
-    if value is None:
-        return False
     printed = True
     try:
         print("{:d}".format(value))

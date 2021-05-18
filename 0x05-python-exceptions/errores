@@ -1,0 +1,4 @@
+Unknown format code 'd' for object of type 'str'
+Unknown format code 'd' for object of type 'str'
+unsupported format string passed to NoneType.__format__
+Unknown format code 'd' for object of type 'float'
