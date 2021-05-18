@@ -46,7 +46,7 @@ class Square:
             print('')
 
     @property
-    def position(value):
+    def position(self, value):
         """return position property"""
         return self.__position
 
