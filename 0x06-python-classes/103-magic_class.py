@@ -2,7 +2,6 @@
 """magic class to create from its bycodes"""
 
 
-import dis
 import math
 
 
@@ -22,6 +21,3 @@ class MagicClass:
     def circumference(self):
         """find circumference"""
         return (2 * math.pi) * self.__radius
-
-
-dis.dis(MagicClass)
