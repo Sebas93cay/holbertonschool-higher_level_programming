@@ -8,16 +8,7 @@ class Square:
     def __init__(self, size=0, position=(0, 0)):
         """Init the square"""
         self.__size = size
-        if (type(position) is not tuple or
-            len(position) is not 2 or
-            any(map(lambda x: type(x) is not int, position)) or
-                any(x < 0 for x in position)):
-            raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = position
-
-    def area(self):
-        """return the square's area"""
-        return self.__size ** 2
 
     @property
     def size(self):
@@ -33,20 +24,6 @@ class Square:
             raise ValueError("size must be >= 0")
         self.__size = value
 
-    def my_print(self):
-        """print the square to stdout"""
-        if self.__size is not 0:
-            for i in range(self.__position[1]):
-                print('')
-            for i in range(self.__size):
-                for w in range(self.__position[0]):
-                    print(' ', end='')
-                for j in range(self.__size):
-                    print("#", end='')
-                print('')
-        else:
-            print('')
-
     @property
     def position(self, value):
         """return position property"""
@@ -61,3 +38,21 @@ class Square:
                 any(x < 0 for x in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
+
+    def area(self):
+        """return the square's area"""
+        return self.__size ** 2
+
+    def my_print(self):
+        """print the square to stdout"""
+        if self.__size is not 0:
+            for i in range(self.__position[1]):
+                print("")
+            for i in range(self.__size):
+                for w in range(self.__position[0]):
+                    print(' ', end='')
+                for j in range(self.__size):
+                    print("#", end='')
+                print('')
+        else:
+            print("")
