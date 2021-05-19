@@ -61,7 +61,7 @@ class SinglyLinkedList:
 
     def __str__(self):
         if self.__head is None:
-            return
+            return ""
         text = ""
         h_node = self.__head
         text = text+str(h_node.data)
