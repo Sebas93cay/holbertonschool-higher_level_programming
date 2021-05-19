@@ -2,6 +2,7 @@
 """magic class to create from its bycodes"""
 
 
+import dis
 import math
 
 
@@ -11,7 +12,7 @@ class MagicClass:
     def __init__(self, radius=0):
         self.__radius = 0
         if (type(radius) is not int and type(radius) is not float):
-            raise TypeError("radius must must be a number")
+            raise TypeError("radius must be a number")
         self.__radius = radius
 
     def area(self):
@@ -21,3 +22,6 @@ class MagicClass:
     def circumference(self):
         """find circumference"""
         return (2 * math.pi) * self.__radius
+
+
+dis.dis(MagicClass)
