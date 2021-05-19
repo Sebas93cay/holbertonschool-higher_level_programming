@@ -7,8 +7,8 @@ class Square:
 
     def __init__(self, size=0, position=(0, 0)):
         """Init the square"""
-        self.size = size
-        self.position = position
+        self.__size = size
+        self.__position = position
 
     @property
     def size(self):
@@ -25,17 +25,17 @@ class Square:
         self.__size = value
 
     @property
-    def position(self):
+    def position(self, value):
         """return position property"""
         return self.__position
 
     @position.setter
     def position(self, value):
         """set the __position"""
-        if not (isinstance(value, tuple) and
-                len(value) == 2 and
-                all(isinstance(v, int) for v in value) and
-                all(v >= 0 for v in value)):
+        if (type(value) is not tuple or
+            len(value) is not 2 or
+            any(map(lambda x: type(x) is not int, value)) or
+                any(x < 0 for x in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
@@ -45,11 +45,10 @@ class Square:
 
     def my_print(self):
         """print the square to stdout"""
-        if self.__size != 0:
-            for row in range(self.__position[1]):
-                print("")
-            for col in range(self.__size):
-                print("{}{}".format(" " * self.__position[0],
-                                    "#" * self.__size))
+        if self.__size is not 0:
+            print("\n" * self.__position[1], end='')
+            for i in range(self.__size):
+                print(" " * self.__position[0], end='')
+                print("#" * self.__size)
         else:
             print("")
