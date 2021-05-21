@@ -62,6 +62,8 @@ class Rectangle:
 
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
+        if (rect_1 is None or rect_2 is None):
+            return None
         if type(rect_1) is Rectangle:
             TypeError("rect_1 must be an instance of Rectangle")
         if type(rect_2) is Rectangle:
