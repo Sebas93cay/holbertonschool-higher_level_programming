@@ -2,7 +2,6 @@
 """Solution to the N queens problem"""
 
 import sys
-from typing import SupportsComplex
 
 
 def is_int(n):
@@ -13,18 +12,11 @@ def is_int(n):
     except:
         return False
 
-# sol = [[0, 1], [1, 3], [2, 0], [3, 2]]
-
 
 def accept(N, sol):
     """
     accept solution to N queen problem if complete is True
     returns true if solution is accepted, False otherwise
-
-
-    if complete is false, just check wheter all the queens are
-    in "peace" to eache other"
-    returns True if peace exist, false otherwise
     """
     if (len(sol) == N):
         return True
