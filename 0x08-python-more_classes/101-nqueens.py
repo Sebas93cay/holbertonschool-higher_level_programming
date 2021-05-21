@@ -1,74 +1,97 @@
 #!/usr/bin/python3
-"""This module prints all the possible combinations one can make to solve
-the N queens problem. That is, given an N*N 'chess' board, what are the
-positions of N queens so that no queens threat each other's position.
+"""Solution to the N queens problem"""
 
-Because this is a recursive solution using backtracking, the time complexity
-is bound to be O(N!), which means, for a board more than 25 * 25 this algorithm
-may perform poorly
-"""
+import sys
+from typing import SupportsComplex
 
 
-def backtrack_queens(N, current, queens_pos):
-    """The actual backtracking function.
+def is_int(n):
+    """check if a string is int"""
+    try:
+        int(n)
+        return True
+    except:
+        return False
 
-    Goes through the whole N * N board putting queens.
-    If a position is valid for the current queen, the function calls itself
-    with the next queen to be put. If not, then the queen moves to the next
-    position removing the current one from the valid position array.
+# sol = [[0, 1], [1, 3], [2, 0], [3, 2]]
 
-    Args:
-        N (int): The size of the board.
-        current (int): The position of the current queen.
-        queen_pos (:obj:`list` of :obj:`int`): The array of queen positions to
-                                               be put.
+
+def accept(N, sol):
     """
-    if (current == N):
-        print([[r, c] for r, c in enumerate(queens_pos)])
-    else:
-        for col in range(N):
-            queens_pos.append(col)
-            if (valid_position(queens_pos, current)):
-                backtrack_queens(N, current + 1, queens_pos)
-            queens_pos.pop(-1)
+    accept solution to N queen problem if complete is True
+    returns true if solution is accepted, False otherwise
 
 
-def valid_position(queens_pos, current):
-    """Checks if the position of the current queen is valid.
-
-    If the row of one of the past queens coincides with the current one,
-    returns False.
-
-    If the diagonal of one of the past queens coincides with the current one,
-    returns False.
-
-    Returns:
-        bool: True if valid, False otherwise.
+    if complete is false, just check wheter all the queens are
+    in "peace" to eache other"
+    returns True if peace exist, false otherwise
     """
-    for i in range(current):
-        if queens_pos[i] == queens_pos[current]:
-            return False
-        if current - i == abs(queens_pos[current] - queens_pos[i]):
-            return False
-    return True
+    if (len(sol) == N):
+        return True
+    return False
 
 
-if __name__ == '__main__':
-    from sys import argv
+def reject(sol):
+    """return true if sol is not a solution for the problem"""
+    # print("inicio de reject")
+    last = len(sol) - 1
 
-    if (len(argv) != 2):
+    for i in range(last):
+        if sol[i] == sol[last]:
+            return True
+        if (last - i) == abs(sol[last] - sol[i]):
+            return True
+    return False
+
+
+def next(N, sol):
+    """moves last queen one position"""
+    last = len(sol) - 1
+    if (sol[last] < N - 1):
+        sol[last] += 1
+        return sol
+    sol.pop()
+    return None
+
+
+def first(N, sol):
+    """place a new queen"""
+    l = len(sol)
+    if l == N:
+        return None
+    sol.append(0)
+    return sol
+
+
+def process(N, sol):
+    """recursive process to check posibles solutions from solution"""
+    if (reject(sol)):
+        return
+    if (accept(N, sol)):
+        print(str([[x, y] for (x, y) in enumerate(sol)]))
+        return
+    sol = first(N, sol)
+    while (sol is not None):
+        process(N, sol)
+        sol = next(N, sol)
+
+
+def main():
+    """main function"""
+    if (len(sys.argv) is not 2):
         print("Usage: nqueens N")
         exit(1)
-
-    try:
-        N = int(argv[1])
-    except ValueError:
+    N = sys.argv[1]
+    if (is_int(N) is False):
         print("N must be a number")
         exit(1)
-
+    N = int(N)
     if (N < 4):
         print("N must be at least 4")
         exit(1)
 
-    queens_pos = []
-    backtrack_queens(N, 0, queens_pos)
+    sol = []
+    process(N, sol)
+
+
+main()
