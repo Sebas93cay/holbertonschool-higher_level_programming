@@ -2,6 +2,7 @@
 """Solution to the N queens problem"""
 
 import sys
+from typing import SupportsComplex
 
 
 def is_int(n):
@@ -14,10 +15,28 @@ def is_int(n):
 #sol = [[0, 1], [1, 3], [2, 0], [3, 2]]
 
 
-def accept(N, sol):
-    if len(sol) is not N:
+def copy_sol(solution):
+    sol = []
+    for i in solution:
+        sol.append(i[:])
+    return sol
+
+
+def accept(N, sol, complete):
+    """
+    accept solution to N queen problem if complete is True
+    returns true if solution is accepted, False otherwise
+
+
+    if complete is false, just check wheter all the queens are 
+    in "peace" to eache other"
+    returns True if peace exist, false otherwise
+    """
+    if ((len(sol) is not N) and complete):
         return False
     i = 0
+    N = len(sol)
+    #print("in accept N is now = {}".format(N))
     while i < N - 1:
         j = i + 1
         while j < N:
@@ -33,36 +52,63 @@ def accept(N, sol):
 
 def check_partial_sol(sol, queen):
     """
-    check if queen does not attack the queens in sol
-    return a list of two elements.
-    list[0] is True if queen does not attack anyone, 
+    check if queen does not attack the queens in sol.
+    In case queen does not attack anyone its appended to sol
+    return True if queen does not attack anyone, 
     false otherwise.
-    list[1] returns the sol with the new queen if it did
-    not attack anyone
     """
     for q in sol:
         if ((q[0] is queen[0]) or
             (q[1] is queen[1]) or
             (q[1] - queen[1] is q[0]-queen[0]) or
                 (q[1] - queen[1] is queen[0]-q[0])):
-            return [False, None]
+            return False
     sol.append(queen)
-    return [True, sol]
+    return True
 
 
 def reject(N, sol):
+    #print("inicio de reject")
+    if (accept(N, sol, False) is False):
+        return False
+    #print("despues de accept en reject")
     i = len(sol)
     for j in range(N):
-        check = check_partial_sol(sol, [i, j])
-        if (check[0]):
-            sol = check[1]
+        if (check_partial_sol(sol, [i, j])):
+            #print("first = "+str(sol))
             return False
+    #print("final de reject")
+    return True
 
 
-def process(N, sol):
+def next(N, solution):
+    i = len(solution) - 1
+
+    if (solution[i][1] is N - 1):
+        #print(str(solution)+" no tiene posible next")
+        return None
+    sol = copy_sol(solution)
+    sol[i][1] += 1
+    while(sol[i][1] < N):
+        if accept(N, sol, False):
+            #print("next = "+str(sol))
+            return sol
+        sol[i][1] += 1
+
+    #print(str(solution)+" no tiene posible next")
+    return None
+
+
+def process(N, solution):
+    sol = copy_sol(solution)
     if (reject(N, sol)):
         return
-    print(str(sol))
+    if (accept(N, sol, True)):
+        print(str(sol))
+        return
+    while (sol is not None):
+        process(N, sol)
+        sol = next(N, sol)
 
 
 def main():
@@ -80,10 +126,12 @@ def main():
         exit(1)
 
     #sol = [[x, None] for x in range(N)]
-    sol = [[0, 0]]
+    #sol = [[0, 0], [1, 2], [2, 0]]
+    sol = []
 
     process(N, sol)
-    print("sol final = "+str(sol))
+
+    #print("sol final = "+str(sol))
 
 
 main()
