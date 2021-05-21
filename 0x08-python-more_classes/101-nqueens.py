@@ -42,10 +42,14 @@ def accept(N, sol, complete):
     while i < N - 1:
         j = i + 1
         while j < N:
-            if ((sol[i][0] is sol[j][0]) or
-                (sol[i][1] is sol[j][1]) or
-                (sol[i][0] - sol[j][0] is sol[i][1] - sol[j][1]) or
-                    (sol[i][0] - sol[j][0] is sol[j][1] - sol[i][1])):
+            x1 = sol[i][0]
+            y1 = sol[i][1]
+            x2 = sol[j][0]
+            y2 = sol[j][1]
+            if ((x1 is x2) or
+                (y1 is y2) or
+                (abs(x1 - x2) is abs(y1 - y2)) or
+                    (abs(x1 - x2) is abs(y2 - y1))):
                 return False
             j += 1
         i += 1
@@ -73,7 +77,7 @@ def reject(N, sol):
     """return true if sol is not a solution for the problem"""
     # print("inicio de reject")
     if (accept(N, sol, False) is False):
-        return False
+        return True
     # print("despues de accept en reject")
     i = len(sol)
     for j in range(N):
