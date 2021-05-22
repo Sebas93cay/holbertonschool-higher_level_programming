@@ -1,5 +1,4 @@
 #!/usr/bin/python3
 def magic_string():
-    if not magic_string.text:
-        magic_string.text = "holberton"
-    return magic_string.text
+    magic_string.calls = getattr(magic_string, "calls", -1) + 1
+    return "Holberton" + ", Holberton"*magic_string.calls
