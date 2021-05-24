@@ -1,0 +1,14 @@
+Importing function:
+>>> add_integer = __import__('0-add_integer').add_integer
+
+
+Testing:
+>>> add_integer(6,7)
+13
+>>> add_integer(-3,4)
+1
+>>> add_integer(-3, "4")
+1
+>>> add_integer(-3, "four")
+Traceback (most recent call last):
+b must be an integer
