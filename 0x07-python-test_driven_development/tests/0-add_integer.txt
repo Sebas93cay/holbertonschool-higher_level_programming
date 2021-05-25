@@ -11,4 +11,4 @@ Testing:
 1
 >>> add_integer(-3, "four")
 Traceback (most recent call last):
-b must be an integer
+TypeError: b must be an integer

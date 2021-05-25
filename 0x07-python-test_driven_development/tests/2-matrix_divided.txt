@@ -1,0 +1,37 @@
+Importing function:
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+
+Testing:
+>>> matrix_divided([[1,2,7],[3,4,8],[4,5,6]], 7)
+[[0.14, 0.29, 1.0], [0.43, 0.57, 1.14], [0.57, 0.71, 0.86]]
+>>> matrix_divided([[1.5,2],[4.6,9]], -7)
+[[-0.21, -0.29], [-0.66, -1.29]]
+>>> matrix_divided([[1.5,2],[4.6,7]], -7)
+[[-0.21, -0.29], [-0.66, -1.0]]
+>>> matrix_divided([[1.5,2,6],[4,4.6,7],[0,0,5]], -70)
+[[-0.02, -0.03, -0.09], [-0.06, -0.07, -0.1], [-0.0, -0.0, -0.07]]
+>>> matrix_divided([[10]], 2)
+[[5.0]]
+
+
+testing with bad matrix or div
+>>> matrix_divided("Hola", -70)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided(6, -70)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([6], 1)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[6],[1,2]],6)
+Traceback (most recent call last):
+TypeError: Each row of the matrix must have the same size
+
+>>> matrix_divided([[6,5],[1,2]],0)
+Traceback (most recent call last):
+ZeroDivisionError: division by zero
