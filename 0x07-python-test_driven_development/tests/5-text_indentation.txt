@@ -6,9 +6,9 @@ Testing:
 >>> text_indentation("Respecto al nacimiento del escritor, tan solo se conserva un documento de bautismo de la iglesia de Stratford-upon-Avon (centro de Inglaterra) que atestigua que el 26 de abril de 1564 se registró un Guilielmus Johannes Shakespeare. El 23 de abril, la fecha en la que se suele fijar su nacimiento y que coincide además con la de su muerte a los 52 años en 1616, es una convención que se ha adoptado, suponiendo que sus padres le bautizaron tres días después de nacer. Sin embargo, como nació bajo el antiguo calendario juliano, lo que era 23 de abril durante su vida, en realidad sería el 3 de mayo según el calendario gregoriano actual.")
 Respecto al nacimiento del escritor, tan solo se conserva un documento de bautismo de la iglesia de Stratford-upon-Avon (centro de Inglaterra) que atestigua que el 26 de abril de 1564 se registró un Guilielmus Johannes Shakespeare.
 <BLANKLINE>
- El 23 de abril, la fecha en la que se suele fijar su nacimiento y que coincide además con la de su muerte a los 52 años en 1616, es una convención que se ha adoptado, suponiendo que sus padres le bautizaron tres días después de nacer.
+El 23 de abril, la fecha en la que se suele fijar su nacimiento y que coincide además con la de su muerte a los 52 años en 1616, es una convención que se ha adoptado, suponiendo que sus padres le bautizaron tres días después de nacer.
 <BLANKLINE>
- Sin embargo, como nació bajo el antiguo calendario juliano, lo que era 23 de abril durante su vida, en realidad sería el 3 de mayo según el calendario gregoriano actual.
+Sin embargo, como nació bajo el antiguo calendario juliano, lo que era 23 de abril durante su vida, en realidad sería el 3 de mayo según el calendario gregoriano actual.
 <BLANKLINE>
 >>> text_indentation("Respecto al nacimiento del escritor?, ?tan solo se conserva un documento de bautismo de la iglesia de Stratford-upon-Avon (centro de Inglaterra) que .atestigua que el 26 de abril de 1564 se registró un Guilielmus Johannes? Shakespeare. El 23 de abril, la fecha? en la que se suele fijar su nacimiento y que coincide además con la de su muerte a los 52 años? en 1616, es una convención que se ha adoptado, suponiendo que sus padres le: bautizaron tres días después de nacer. Sin embargo, como nació bajo el antiguo: calendario juliano, lo que era 23 de abril durante su vida, en: realidad sería el 3 de mayo según el calendario gregoriano actual.")
 Respecto al nacimiento del escritor?
@@ -19,19 +19,48 @@ tan solo se conserva un documento de bautismo de la iglesia de Stratford-upon-Av
 <BLANKLINE>
 atestigua que el 26 de abril de 1564 se registró un Guilielmus Johannes?
 <BLANKLINE>
- Shakespeare.
+Shakespeare.
 <BLANKLINE>
- El 23 de abril, la fecha?
+El 23 de abril, la fecha?
 <BLANKLINE>
- en la que se suele fijar su nacimiento y que coincide además con la de su muerte a los 52 años?
+en la que se suele fijar su nacimiento y que coincide además con la de su muerte a los 52 años?
 <BLANKLINE>
- en 1616, es una convención que se ha adoptado, suponiendo que sus padres le:
+en 1616, es una convención que se ha adoptado, suponiendo que sus padres le:
 <BLANKLINE>
- bautizaron tres días después de nacer.
+bautizaron tres días después de nacer.
 <BLANKLINE>
- Sin embargo, como nació bajo el antiguo:
+Sin embargo, como nació bajo el antiguo:
 <BLANKLINE>
- calendario juliano, lo que era 23 de abril durante su vida, en:
+calendario juliano, lo que era 23 de abril durante su vida, en:
 <BLANKLINE>
- realidad sería el 3 de mayo según el calendario gregoriano actual.
+realidad sería el 3 de mayo según el calendario gregoriano actual.
+<BLANKLINE>
+
+>>> text_indentation("Respecto  ?  \n hola");
+Respecto  ?
+<BLANKLINE>
+<BLANKLINE>
+hola
+
+>>> text_indentation("Respecto  ?  \n hola:");
+Respecto  ?
+<BLANKLINE>
+<BLANKLINE>
+hola:
+<BLANKLINE>
+
+>>> text_indentation("Respecto  ?  \n hola:   ");
+Respecto  ?
+<BLANKLINE>
+<BLANKLINE>
+hola:
+<BLANKLINE>
+
+
+>>> text_indentation("   \n   Respecto  ?  \n hola:   ");
+<BLANKLINE>
+Respecto  ?
+<BLANKLINE>
+<BLANKLINE>
+hola:
 <BLANKLINE>

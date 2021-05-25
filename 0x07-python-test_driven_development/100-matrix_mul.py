@@ -18,9 +18,11 @@ def matrix_mul(m_a, m_b):
         raise TypeError("m_a can't be empty")
     if (m_b == [] or m_b == [[]]):
         raise TypeError("m_b can't be empty")
-    if (any([any([type(item) not in [int, float] for item in row]) for row in m_a])):
+    if (any([any([type(item) not in [int, float]
+            for item in row]) for row in m_a])):
         raise TypeError("m_a should contain only integers or floats")
-    if (any([any([type(item) not in [int, float] for item in row]) for row in m_b])):
+    if (any([any([type(item) not in [int, float]
+            for item in row]) for row in m_b])):
         raise TypeError("m_b should contain only integers or floats")
     if (any([len(m_a[0]) != len(row) for row in m_a])):
         raise TypeError("each row of m_a must be of the same size")
