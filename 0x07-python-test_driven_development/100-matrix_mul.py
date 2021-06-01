@@ -35,10 +35,13 @@ def matrix_mul(m_a, m_b):
     for i in range(len(m_b[0])):
         nm_b.append([m_b[j][i] for j in range(len(m_b))])
 
-    res = []
+    """ res = []
     for i, row_a in enumerate(m_a):
         res.append([])
         for j, column_b in enumerate(nm_b):
             res[i].append(sum([a*b for (a, b) in zip(row_a, column_b)]))
+ """
+    res = [[sum(a*b for (a, b) in zip(row_a, col_b))
+            for col_b in nm_b] for row_a in m_a]
 
     return res
