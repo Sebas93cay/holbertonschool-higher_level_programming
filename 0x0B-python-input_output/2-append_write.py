@@ -1,4 +1,4 @@
-#!/usr/bin/python3o
+#!/usr/bin/python3
 
 """this module has a function to appends text to a file"""
 

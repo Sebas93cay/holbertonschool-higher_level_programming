@@ -1,4 +1,4 @@
-#!/usr/bin/python3o
+#!/usr/bin/python3
 """
 this module has a function that
 returns the JSON representation of an object
