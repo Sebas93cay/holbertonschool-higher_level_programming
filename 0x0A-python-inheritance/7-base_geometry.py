@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-"""
-function that returns the list of available attributes and
-methods of an object
-"""
+"""Create BaseGeometry class"""
 
 
 class BaseGeometry:
+    """Create BaseGeometry class with area method and integer_validation"""
+
     def area(self):
         raise Exception("area() is not implemented")
 

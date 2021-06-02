@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """
-function that returns the list of available attributes and
-methods of an object
+Rectangle class wiht area and str method
 """
 
 BaseGeometry = __import__("7-base_geometry").BaseGeometry
 
 
 class Rectangle(BaseGeometry):
+    """Rectangle class wiht area and str method"""
+
     def __init__(self, width, height):
         super().__init__()
         self.integer_validator("width", width)
