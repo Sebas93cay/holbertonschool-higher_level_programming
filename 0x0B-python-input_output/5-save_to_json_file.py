@@ -1,4 +1,4 @@
-#!/usr/bin/python3o
+#!/usr/bin/python3
 """
 this module has a function that
 writes an Object to a text file, using a JSON representation
