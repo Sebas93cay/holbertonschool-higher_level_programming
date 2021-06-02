@@ -6,4 +6,4 @@ methods of an object
 
 
 def add_attribute(obj, name, value):
-    pass
+    
