@@ -6,9 +6,6 @@ line containing a specific string
 """
 
 
-from os import EX_CONFIG
-
-
 def append_after(filename="", search_string="", new_string=""):
     try:
         with open(filename, mode="r", encoding="utf-8") as file:
