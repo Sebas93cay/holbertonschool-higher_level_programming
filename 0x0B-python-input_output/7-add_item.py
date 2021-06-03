@@ -15,10 +15,9 @@ if __name__ == '__main__':
 
     try:
         list = load_from_json_file(file_name)
+        for item in sys.argv[1:]:
+            list.append(item)
     except Exception as e:
         pass
-
-    for item in sys.argv[1:]:
-        list.append(item)
 
     save_to_json_file(list, file_name)
