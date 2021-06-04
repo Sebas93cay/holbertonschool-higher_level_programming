@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """
 this scripts reads stdin line by line and computes metrics:
-Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
-Each 10 lines and after a keyboard interruption (CTRL + C), prints those statistics since the beginning:
-Total file size: File size: <total size> where <total size> is the sum of all previous
+Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1"
+<status code> <file size>
+Each 10 lines and after a keyboard interruption (CTRL + C), prints
+those statistics since the beginning:
+Total file size: File size: <total size> where <total size> is the
+sum of all previous
 Number of lines by status code:
 format: <status code>: <number>
 """
