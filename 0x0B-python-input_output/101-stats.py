@@ -54,3 +54,4 @@ if __name__ == '__main__':
                 lines_readed = 0
     except KeyboardInterrupt:
         thePrint(total_size, codes_f, codes)
+        raise
