@@ -12,13 +12,6 @@ format: <status code>: <number>
 """
 
 import fileinput
-import re
-import signal
-
-
-# def signal_handler(sig, frame):
-#     print("you presed the ting")
-#     exit(0)
 
 
 def thePrint(total_size, codes_f, codes):
@@ -29,10 +22,6 @@ def thePrint(total_size, codes_f, codes):
 
 
 if __name__ == '__main__':
-
-    # signal.signal(signal.SIGINT, signal_handler)
-    # signal.signal(signal.SIGINT, signal.default_int_handler)
-
     try:
         lines_readed = 0
         codes_f = {}
