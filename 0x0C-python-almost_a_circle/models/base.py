@@ -9,7 +9,11 @@ import turtle
 
 
 class Base:
-    """Base Class for every other class"""
+    """
+    Base Class for every other geometry class
+    Args:
+        id
+    """
 
     __nb_objects = 0
 
