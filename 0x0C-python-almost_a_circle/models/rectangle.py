@@ -8,6 +8,7 @@ from models.base import Base
 
 class Rectangle(Base):
     """Rectangle Class"""
+
     __nb_objects = 0
 
     def __init__(self, width, height, x=0, y=0, id=None):
@@ -69,15 +70,17 @@ class Rectangle(Base):
         return self.__width * self.__height
 
     def display(self):
-        print("\n"*self.__y, end='')
-        print((' '*self.__x+'#'*self.__width+'\n')*self.__height, end='')
+        print("\n" * self.__y, end="")
+        row = " " * self.__x + "#" * self.__width + "\n"
+        print(row * self.__height, end="")
 
     def __str__(self):
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.__x, self.y,
-                                                       self.__width, self.__height)
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.__x, self.y, self.__width, self.__height
+        )
 
     def update(self, *args, **kwargs):
-        if args != None and len(args) != 0:
+        if args is not None and len(args) != 0:
             for i in range(len(args)):
                 if i == 0:
                     self.id = args[i]
@@ -91,22 +94,24 @@ class Rectangle(Base):
                     self.y = args[i]
             return
 
-        if (kwargs != {}):
-            if 'width' in kwargs.keys():
-                self.width = kwargs['width']
-            if 'height' in kwargs.keys():
-                self.height = kwargs['height']
-            if 'x' in kwargs.keys():
-                self.x = kwargs['x']
-            if 'y' in kwargs.keys():
-                self.y = kwargs['y']
-            if 'id' in kwargs.keys():
-                self.id = kwargs['id']
+        if kwargs != {}:
+            if "width" in kwargs.keys():
+                self.width = kwargs["width"]
+            if "height" in kwargs.keys():
+                self.height = kwargs["height"]
+            if "x" in kwargs.keys():
+                self.x = kwargs["x"]
+            if "y" in kwargs.keys():
+                self.y = kwargs["y"]
+            if "id" in kwargs.keys():
+                self.id = kwargs["id"]
             return
 
     def to_dictionary(self):
-        return {'x': self.x,
-                'y': self.y,
-                'id': self.id,
-                'width': self.width,
-                'height': self.height}
+        return {
+            "x": self.x,
+            "y": self.y,
+            "id": self.id,
+            "width": self.width,
+            "height": self.height,
+        }

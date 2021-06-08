@@ -11,10 +11,11 @@ import turtle
 
 class Base:
     """Base Class for every other class"""
+
     __nb_objects = 0
 
     def __init__(self, id=None):
-        if id != None:
+        if id is not None:
             self.id = id
         else:
             Base.__nb_objects += 1
@@ -23,7 +24,7 @@ class Base:
     @staticmethod
     def to_json_string(list_dictionaries):
         """returns a json string of a list of dictionaries"""
-        if list_dictionaries == None:
+        if list_dictionaries is None:
             return "[]"
         jsons = "["
         for i, d in enumerate(list_dictionaries):
@@ -36,23 +37,23 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         """Save boject as a json string in a file named <Nameclass>.json"""
-        f_name = cls.__name__+".json"
+        f_name = cls.__name__ + ".json"
         d_list = [ob.to_dictionary() for ob in list_objs]
         json_s = Base.to_json_string(d_list)
         with open(f_name, mode="w", encoding="utf-8") as file:
             file.write(json_s)
 
     def from_json_string(json_string):
-        if json_string == None or json_string == "":
+        if json_string is None or json_string == "":
             return []
         return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
         """Create a new object with attributes from dictionary"""
-        if(cls.__name__ == 'Rectangle'):
+        if cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
-        elif cls.__name__ == 'Square':
+        elif cls.__name__ == "Square":
             dummy = cls(1)
         else:
             return
@@ -63,7 +64,7 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """Create a list of instances from a list of dictionaries in a file"""
-        f_name = cls.__name__+".json"
+        f_name = cls.__name__ + ".json"
         try:
             with open(f_name, mode="r", encoding="utf-8") as file:
                 content = file.read()
@@ -77,12 +78,12 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        file_name = cls.__name__+".cvs"
+        file_name = cls.__name__ + ".cvs"
 
-        if cls.__name__ == 'Rectangle':
-            atts = ('id', 'width', 'height', 'x', 'y')
-        elif cls.__name__ == 'Square':
-            atts = ('id', 'size', 'x', 'y')
+        if cls.__name__ == "Rectangle":
+            atts = ("id", "width", "height", "x", "y")
+        elif cls.__name__ == "Square":
+            atts = ("id", "size", "x", "y")
 
         with open(file_name, mode="w", encoding="utf-8") as file:
             spamwriter = csv.writer(file)
@@ -91,15 +92,15 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        file_name = cls.__name__+".cvs"
+        file_name = cls.__name__ + ".cvs"
 
-        if cls.__name__ == 'Rectangle':
-            atts = ('id', 'width', 'height', 'x', 'y')
-        elif cls.__name__ == 'Square':
-            atts = ('id', 'size', 'x', 'y')
+        if cls.__name__ == "Rectangle":
+            atts = ("id", "width", "height", "x", "y")
+        elif cls.__name__ == "Square":
+            atts = ("id", "size", "x", "y")
 
         objs = []
-        with open(file_name, newline='') as file:
+        with open(file_name, newline="") as file:
             spamreader = csv.reader(file)
             for row in spamreader:
                 el_dic = {}
@@ -112,8 +113,8 @@ class Base:
     def draw(list_rectangles, list_squares):
         Juan = turtle.Turtle()
         turtle.setworldcoordinates(0, -1000, 1000, 0)
-        #turtle.setworldcoordinates(0, -1000, 100, 0)
-        #turtle.screensize(100, 1000)
+        # turtle.setworldcoordinates(0, -1000, 100, 0)
+        # turtle.screensize(100, 1000)
 
         def draw_lists(list, border_color, fill_color, turtle):
             turtle.color(border_color, fill_color)
@@ -123,11 +124,15 @@ class Base:
                 turtle.pendown()
                 turtle.begin_fill()
                 for i in range(2):
-                    turtle.forward(rec.size if hasattr(
-                        rec, "size") else rec.width)
+                    if hasattr(rec, "size"):
+                        turtle.forward(rec.size)
+                    else:
+                        turtle.forward(rec.width)
                     turtle.right(90)
-                    turtle.forward(rec.size if hasattr(
-                        rec, "size") else rec.height)
+                    if hasattr(rec, "size"):
+                        turtle.forward(rec.size)
+                    else:
+                        turtle.forward(rec.height)
                     turtle.right(90)
                 turtle.end_fill()
 

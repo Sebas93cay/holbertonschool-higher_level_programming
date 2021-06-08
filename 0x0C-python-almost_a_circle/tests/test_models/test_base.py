@@ -28,10 +28,12 @@ class testBase(unittest.TestCase):
     def test_json_string(self):
         r1 = Square(8)
         d_r1 = r1.to_dictionary()
-        d_3 = {'uno': 1, 'dos': 2}
-        self.assertEqual(Base.to_json_string(
-            [d_r1, d_3]), '[{"x": 0, "y": 0, "id": 1, "size": 8}, {"uno": 1, "dos": 2}]')
-        self.assertEqual(Base.to_json_string(None), '[]')
+        d_3 = {"uno": 1, "dos": 2}
+        self.assertEqual(
+            Base.to_json_string([d_r1, d_3]),
+            '[{"x": 0, "y": 0, "id": 1, "size": 8}, {"uno": 1, "dos": 2}]',
+        )
+        self.assertEqual(Base.to_json_string(None), "[]")
 
     def test_save_file(self):
         r1 = Rectangle(10, 7, 2, 8)
@@ -39,9 +41,10 @@ class testBase(unittest.TestCase):
         Rectangle.save_to_file([r1, r2])
         with open("Rectangle.json", mode="r", encoding="utf-8") as file:
             rectangle_file = file.read()
-        test = self.assertEqual(
-            rectangle_file, '[{"x": 2, "y": 8, "id": 1, "width": 10, "height": 7}, {"x": 0, "y": 0, "id": 2, "width": 2, "height": 4}]')
-        if test == None:
+        ex1 = '[{"x": 2, "y": 8, "id": 1, "width": 10, "height": 7}, '
+        ex2 = '{"x": 0, "y": 0, "id": 2, "width": 2, "height": 4}]'
+        test = self.assertEqual(rectangle_file, ex1 + ex2)
+        if test is None:
             os.remove("Rectangle.json")
 
         r3 = Square(9)
@@ -49,15 +52,16 @@ class testBase(unittest.TestCase):
         Square.save_to_file([r3, r4])
         with open("Square.json", mode="r", encoding="utf-8") as file:
             square_file = file.read()
-        test = self.assertEqual(
-            square_file, '[{"x": 0, "y": 0, "id": 3, "size": 9}, {"x": 0, "y": 0, "id": 78, "size": 4}]')
-        if test == None:
+        ex1 = '[{"x": 0, "y": 0, "id": 3, "size": 9}, '
+        ex2 = '{"x": 0, "y": 0, "id": 78, "size": 4}]'
+        test = self.assertEqual(square_file, ex1 + ex2)
+        if test is None:
             os.remove("Square.json")
 
     def test_string_to_dictionary(self):
         list_input = [
-            {'id': 89, 'width': 10, 'height': 4},
-            {'id': 7, 'width': 1, 'height': 7}
+            {"id": 89, "width": 10, "height": 4},
+            {"id": 7, "width": 1, "height": 7},
         ]
         json_list_input = Rectangle.to_json_string(list_input)
         list_output = Rectangle.from_json_string(json_list_input)
@@ -77,8 +81,13 @@ class testBase(unittest.TestCase):
         list_rectangles_input = [r1, r2]
         Rectangle.save_to_file(list_rectangles_input)
         list_rectangles_output = Rectangle.load_from_file()
-        self.assertEqual([r1.to_dictionary(), r2.to_dictionary()], [
-                         list_rectangles_output[0].to_dictionary(), list_rectangles_output[1].to_dictionary()])
+        self.assertEqual(
+            [r1.to_dictionary(), r2.to_dictionary()],
+            [
+                list_rectangles_output[0].to_dictionary(),
+                list_rectangles_output[1].to_dictionary(),
+            ],
+        )
 
     def test_save_csv(self):
         r1 = Rectangle(10, 7, 2, 8)
@@ -88,8 +97,10 @@ class testBase(unittest.TestCase):
 
         list_rectangles_output = Rectangle.load_from_file_csv()
 
-        self.assertEqual([ob.to_dictionary() for ob in list_rectangles_input], [
-                         ob.to_dictionary() for ob in list_rectangles_output])
+        self.assertEqual(
+            [ob.to_dictionary() for ob in list_rectangles_input],
+            [ob.to_dictionary() for ob in list_rectangles_output],
+        )
 
         s1 = Square(5)
         s2 = Square(7, 9, 1)
@@ -97,10 +108,14 @@ class testBase(unittest.TestCase):
 
         Square.save_to_file_csv(list_squares_input)
 
-        self.assertEqual([ob.to_dictionary() for ob in list_rectangles_input], [
-            ob.to_dictionary() for ob in list_rectangles_output])
+        self.assertEqual(
+            [ob.to_dictionary() for ob in list_rectangles_input],
+            [ob.to_dictionary() for ob in list_rectangles_output],
+        )
 
         list_squares_output = Square.load_from_file_csv()
 
-        self.assertEqual([ob.to_dictionary() for ob in list_squares_input], [
-            ob.to_dictionary() for ob in list_squares_output])
+        self.assertEqual(
+            [ob.to_dictionary() for ob in list_squares_input],
+            [ob.to_dictionary() for ob in list_squares_output],
+        )
