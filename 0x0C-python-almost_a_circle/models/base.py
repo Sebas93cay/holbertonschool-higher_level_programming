@@ -2,7 +2,6 @@
 """
 This module has the base class for every other class
 """
-
 import csv
 import json
 import turtle
