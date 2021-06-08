@@ -98,7 +98,6 @@ class Base:
                 for obj in list_objs:
                     spamwriter.writerow([getattr(obj, att) for att in atts])
 
-
     @classmethod
     def load_from_file_csv(cls):
         """loads from cvs file to a list of objects"""
