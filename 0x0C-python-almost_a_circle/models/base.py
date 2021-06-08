@@ -92,10 +92,12 @@ class Base:
 
         with open(file_name, mode="w", encoding="utf-8") as file:
             spamwriter = csv.writer(file)
-            for obj in list_objs:
-                spamwriter.writerow([getattr(obj, att) for att in atts])
             if list_objs is None:
                 spamwriter.writerow([])
+            else:
+                for obj in list_objs:
+                    spamwriter.writerow([getattr(obj, att) for att in atts])
+
 
     @classmethod
     def load_from_file_csv(cls):
