@@ -15,6 +15,7 @@ class Base:
     __nb_objects = 0
 
     def __init__(self, id=None):
+        """init function"""
         if id is not None:
             self.id = id
         else:
@@ -78,6 +79,7 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
+        """save object in list_objs to a cvs file"""
         file_name = cls.__name__ + ".cvs"
 
         if cls.__name__ == "Rectangle":
@@ -92,6 +94,7 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
+        """loads from cvs file to a list of objects"""
         file_name = cls.__name__ + ".cvs"
 
         if cls.__name__ == "Rectangle":
@@ -111,12 +114,14 @@ class Base:
 
     @staticmethod
     def draw(list_rectangles, list_squares):
+        """draw list of rectangles and squares"""
         Juan = turtle.Turtle()
         turtle.setworldcoordinates(0, -1000, 1000, 0)
         # turtle.setworldcoordinates(0, -1000, 100, 0)
         # turtle.screensize(100, 1000)
 
         def draw_lists(list, border_color, fill_color, turtle):
+            """draw list of objects"""
             turtle.color(border_color, fill_color)
             for rec in list:
                 turtle.penup()
