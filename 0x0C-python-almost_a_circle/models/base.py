@@ -1,23 +1,20 @@
 #!/usr/bin/python3
-"""
-This module has the base class for every other class
-"""
-import csv
+"""This module define the Base class"""
 import json
+import csv
 import turtle
 
 
 class Base:
-    """
-    Base Class for every other geometry class
+    """Represent a Geometry Base
     Args:
-        id
+        nb_objects (int): number of base class instance
     """
 
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """init function"""
+        """Initialize a base"""
         if id is not None:
             self.id = id
         else:
@@ -26,123 +23,80 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """returns a json string of a list of dictionaries"""
-        if list_dictionaries is None:
-            return "[]"
-        jsons = "["
-        for i, d in enumerate(list_dictionaries):
-            if i != 0:
-                jsons += ", "
-            jsons += json.dumps(d)
-        jsons += "]"
-        return jsons
+        """Returns the JSON string representation of list_dictionaries"""
+        return json.dumps(list_dictionaries) if list_dictionaries else "[]"
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """Save boject as a json string in a file named <Nameclass>.json"""
-        f_name = cls.__name__ + ".json"
-        d_list = [ob.to_dictionary() for ob in list_objs]
-        json_s = Base.to_json_string(d_list)
-        with open(f_name, mode="w", encoding="utf-8") as file:
-            file.write(json_s)
+        """Writes the JSON string representation of list_objs to a file"""
+        if not list_objs:
+            list_objs = []
+        objects = list(map(lambda obj: obj.to_dictionary(), list_objs))
+        with open(cls.__name__ + ".json", "w") as f:
+            f.write(Base.to_json_string(objects))
 
+    @staticmethod
     def from_json_string(json_string):
-        if json_string is None or json_string == "":
-            return []
-        return json.loads(json_string)
+        """Returns the list of the JSON string representation json_string"""
+        return json.loads(json_string) if json_string else []
 
     @classmethod
     def create(cls, **dictionary):
-        """Create a new object with attributes from dictionary"""
+        """Return a new instance with all attributes already set"""
         if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
-        elif cls.__name__ == "Square":
-            dummy = cls(1)
+            base = cls(1, 1)
         else:
-            return
-
-        dummy.update(**dictionary)
-        return dummy
+            base = cls(1)
+        base.update(**dictionary)
+        return base
 
     @classmethod
     def load_from_file(cls):
-        """Create a list of instances from a list of dictionaries in a file"""
-        f_name = cls.__name__ + ".json"
+        """Returns a list of instances in a json file"""
         try:
-            with open(f_name, mode="r", encoding="utf-8") as file:
-                content = file.read()
-        except:
+            with open(cls.__name__ + ".json", "r") as f:
+                list_dicts = cls.from_json_string(f.read())
+                return [cls.create(**dic) for dic in list_dicts]
+        except FileNotFoundError:
             return []
-
-        dics = json.loads(content)
-        objs = [cls.create(**d) for d in dics]
-
-        return objs
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """save object in list_objs to a cvs file"""
-        file_name = cls.__name__ + ".cvs"
+        """Writes the CSV string representation of list_objs to a file"""
+        objects = list(map(lambda obj: obj.to_dictionary(), list_objs))
 
         if cls.__name__ == "Rectangle":
-            atts = ("id", "width", "height", "x", "y")
-        elif cls.__name__ == "Square":
-            atts = ("id", "size", "x", "y")
+            keys = ["id", "width", "height", "x", "y"]
+        else:
+            keys = ["id", "size", "x", "y"]
 
-        with open(file_name, mode="w", encoding="utf-8") as file:
-            spamwriter = csv.writer(file)
-            for obj in list_objs:
-                spamwriter.writerow([getattr(obj, att) for att in atts])
+        with open(cls.__name__ + ".csv", "w") as f:
+            if len(objects) > 0:
+                dict_writer = csv.DictWriter(f, keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(objects)
 
     @classmethod
     def load_from_file_csv(cls):
-        """loads from cvs file to a list of objects"""
-        file_name = cls.__name__ + ".cvs"
+        """Returns a list of instances in a csv file"""
+        try:
+            with open(cls.__name__ + ".csv", "r") as f:
+                l = [
+                    {k: int(v) for k, v in row.items()}
+                    for row in csv.DictReader(f, skipinitialspace=True)
+                ]
+                return [cls.create(**dic) for dic in l]
+        except FileNotFoundError:
+            return []
 
-        if cls.__name__ == "Rectangle":
-            atts = ("id", "width", "height", "x", "y")
-        elif cls.__name__ == "Square":
-            atts = ("id", "size", "x", "y")
-
-        objs = []
-        with open(file_name, newline="") as file:
-            spamreader = csv.reader(file)
-            for row in spamreader:
-                el_dic = {}
-                for key, val in zip(atts, row):
-                    el_dic[key] = int(val)
-                objs.append(cls.create(**el_dic))
-        return objs
-
-    @staticmethod
     def draw(list_rectangles, list_squares):
-        """draw list of rectangles and squares"""
-        Juan = turtle.Turtle()
-        turtle.setworldcoordinates(0, -1000, 1000, 0)
-        # turtle.setworldcoordinates(0, -1000, 100, 0)
-        # turtle.screensize(100, 1000)
-
-        def draw_lists(list, border_color, fill_color, turtle):
-            """draw list of objects"""
-            turtle.color(border_color, fill_color)
-            for rec in list:
-                turtle.penup()
-                turtle.goto(rec.x, -(rec.y))
-                turtle.pendown()
-                turtle.begin_fill()
-                for i in range(2):
-                    if hasattr(rec, "size"):
-                        turtle.forward(rec.size)
-                    else:
-                        turtle.forward(rec.width)
-                    turtle.right(90)
-                    if hasattr(rec, "size"):
-                        turtle.forward(rec.size)
-                    else:
-                        turtle.forward(rec.height)
-                    turtle.right(90)
-                turtle.end_fill()
-
-        draw_lists(list_rectangles, "brown", "red", Juan)
-        draw_lists(list_squares, "brown", "blue", Juan)
-        turtle.done()
+        """Open a window and draws all the Rectangles and Squares"""
+        t = turtle.Turtle()
+        for r in list_rectangles:
+            for _ in range(4):
+                if _ % 2 == 0:
+                    t.forward(20)  # Forward turtle by l units
+                    t.left(90)  # Turn turtle by 90 degree
+                else:
+                    t.forward(20)  # Forward turtle by w units
+                    t.left(90)  # Turn turtle by 90 degree
