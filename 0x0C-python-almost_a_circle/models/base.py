@@ -115,7 +115,8 @@ class Base:
                 el_dic = {}
                 for key, val in zip(atts, row):
                     el_dic[key] = int(val)
-                objs.append(cls.create(**el_dic))
+                if len(row) > 0:
+                    objs.append(cls.create(**el_dic))
         return objs
 
     @staticmethod
