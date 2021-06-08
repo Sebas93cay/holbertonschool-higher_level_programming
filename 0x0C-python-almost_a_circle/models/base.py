@@ -75,7 +75,7 @@ class Base:
         except:
             return []
 
-        dics = json.loads(content)
+        dics = cls.from_json_string(content)
         objs = [cls.create(**d) for d in dics]
 
         return objs
