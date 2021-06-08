@@ -5,7 +5,6 @@ This module has the base class for every other class
 
 import csv
 import json
-from json.encoder import JSONEncoder
 import turtle
 
 
