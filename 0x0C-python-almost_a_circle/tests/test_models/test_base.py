@@ -79,3 +79,28 @@ class testBase(unittest.TestCase):
         list_rectangles_output = Rectangle.load_from_file()
         self.assertEqual([r1.to_dictionary(), r2.to_dictionary()], [
                          list_rectangles_output[0].to_dictionary(), list_rectangles_output[1].to_dictionary()])
+
+    def test_save_csv(self):
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file_csv(list_rectangles_input)
+
+        list_rectangles_output = Rectangle.load_from_file_csv()
+
+        self.assertEqual([ob.to_dictionary() for ob in list_rectangles_input], [
+                         ob.to_dictionary() for ob in list_rectangles_output])
+
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        list_squares_input = [s1, s2]
+
+        Square.save_to_file_csv(list_squares_input)
+
+        self.assertEqual([ob.to_dictionary() for ob in list_rectangles_input], [
+            ob.to_dictionary() for ob in list_rectangles_output])
+
+        list_squares_output = Square.load_from_file_csv()
+
+        self.assertEqual([ob.to_dictionary() for ob in list_squares_input], [
+            ob.to_dictionary() for ob in list_squares_output])

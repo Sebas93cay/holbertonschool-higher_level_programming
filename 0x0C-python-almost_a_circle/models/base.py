@@ -3,8 +3,10 @@
 This module has the base class for every other class
 """
 
+import csv
 import json
 from json.encoder import JSONEncoder
+import turtle
 
 
 class Base:
@@ -72,3 +74,63 @@ class Base:
         objs = [cls.create(**d) for d in dics]
 
         return objs
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        file_name = cls.__name__+".cvs"
+
+        if cls.__name__ == 'Rectangle':
+            atts = ('id', 'width', 'height', 'x', 'y')
+        elif cls.__name__ == 'Square':
+            atts = ('id', 'size', 'x', 'y')
+
+        with open(file_name, mode="w", encoding="utf-8") as file:
+            spamwriter = csv.writer(file)
+            for obj in list_objs:
+                spamwriter.writerow([getattr(obj, att) for att in atts])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        file_name = cls.__name__+".cvs"
+
+        if cls.__name__ == 'Rectangle':
+            atts = ('id', 'width', 'height', 'x', 'y')
+        elif cls.__name__ == 'Square':
+            atts = ('id', 'size', 'x', 'y')
+
+        objs = []
+        with open(file_name, newline='') as file:
+            spamreader = csv.reader(file)
+            for row in spamreader:
+                el_dic = {}
+                for key, val in zip(atts, row):
+                    el_dic[key] = int(val)
+                objs.append(cls.create(**el_dic))
+        return objs
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        Juan = turtle.Turtle()
+        turtle.setworldcoordinates(0, -1000, 1000, 0)
+        #turtle.setworldcoordinates(0, -1000, 100, 0)
+        #turtle.screensize(100, 1000)
+
+        def draw_lists(list, border_color, fill_color, turtle):
+            turtle.color(border_color, fill_color)
+            for rec in list:
+                turtle.penup()
+                turtle.goto(rec.x, -(rec.y))
+                turtle.pendown()
+                turtle.begin_fill()
+                for i in range(2):
+                    turtle.forward(rec.size if hasattr(
+                        rec, "size") else rec.width)
+                    turtle.right(90)
+                    turtle.forward(rec.size if hasattr(
+                        rec, "size") else rec.height)
+                    turtle.right(90)
+                turtle.end_fill()
+
+        draw_lists(list_rectangles, "brown", "red", Juan)
+        draw_lists(list_squares, "brown", "blue", Juan)
+        turtle.done()
