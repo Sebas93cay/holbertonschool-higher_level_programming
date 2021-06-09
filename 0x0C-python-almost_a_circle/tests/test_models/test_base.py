@@ -48,17 +48,18 @@ class testBase(unittest.TestCase):
         self.assertEqual(b4.id, 34)
         self.assertEqual(b5.id, 4)
 
-    # def test_json_string(self):
-    #     """
-    #     test create json string
-    #     """
-    #     r1 = Square(8, id=908)
-    #     d_r1 = r1.to_dictionary()
-    #     d_3 = {"uno": 1, "dos": 2}
-    #     self.assertEqual(
-    #         Base.to_json_string([d_r1, d_3]),
-    #         '[{"x": 0, "y": 0, "id": 908, "size": 8}, {"uno": 1, "dos": 2}]')
-    #     self.assertEqual(Base.to_json_string(None), "[]")
+    def test_json_string(self):
+        """
+        test create json string
+        """
+        pass
+        # r1 = Square(8, id=908)
+        # d_r1 = r1.to_dictionary()
+        # d_3 = {"uno": 1, "dos": 2}
+        # self.assertEqual(
+        #     Base.to_json_string([d_r1, d_3]),
+        #     '[{"x": 0, "y": 0, "id": 908, "size": 8}, {"uno": 1, "dos": 2}]')
+        # self.assertEqual(Base.to_json_string(None), "[]")
 
     # def test_save_file(self):
     #     """
