@@ -18,9 +18,10 @@ class testBase(unittest.TestCase):
 
     def test_pep8(self):
         """test pep8"""
-        style = pep8.StyleGuide()
+        style = pep8.StyleGuide(quit=True)
         check = style.check_files('models/base.py')
-        self.assertEqual(check.total_errors, 0)
+        self.assertEqual(check.total_errors, 0,
+                         'PEP8 style errors: %d' % check.total_errors)
 
     def test_init(self):
         """test init"""
