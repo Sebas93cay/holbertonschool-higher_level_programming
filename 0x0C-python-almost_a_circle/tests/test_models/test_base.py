@@ -58,7 +58,7 @@ class testBase(unittest.TestCase):
         # self.assertEqual(
         #     Base.to_json_string([d_r1, d_3]),
         #     '[{"x": 0, "y": 0, "id": 908, "size": 8}, {"uno": 1, "dos": 2}]')
-        # self.assertEqual(Base.to_json_string(None), "[]")
+        self.assertEqual(Base.to_json_string(None), "[]")
 
     # def test_save_file(self):
     #     """
