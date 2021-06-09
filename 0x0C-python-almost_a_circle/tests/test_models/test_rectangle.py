@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""This module has the test for the Rectangle class"""
 from io import StringIO
 from models.rectangle import Rectangle, Base
 import unittest
@@ -7,11 +7,14 @@ from unittest.mock import patch
 
 
 class testRectangle(unittest.TestCase):
+    """tests for the rectangle class"""
     def setUp(self):
+        """set up for every test"""
         super().setUp()
         Base._Base__nb_objects = 0
 
     def test_init(self):
+        """test init"""
         # test rectangles id's
         r1 = Rectangle(10, 2)
         self.assertEqual(r1.id, 1)
@@ -29,16 +32,19 @@ class testRectangle(unittest.TestCase):
         self.assertEqual(r5.id, "monaco")
 
     def test_TypeErrors(self):
+        """test that should raise TypeErrors"""
         self.assertRaises(TypeError, Rectangle, 4, "5")
         self.assertRaises(TypeError, Rectangle, 6, 5, "foo")
         self.assertRaises(TypeError, Rectangle, 6, 5, 10, "faa")
 
     def test_ValueErrors(self):
+        """test that should raise ValueErrors"""
         self.assertRaises(ValueError, Rectangle, -4, 7)
         self.assertRaises(ValueError, Rectangle, 6, 7, 0, -1)
         self.assertRaises(ValueError, Rectangle, 6, 0, 0, 1)
 
     def test_area(self):
+        """test area method"""
         r1 = Rectangle(10, 2)
         self.assertEqual(r1.area(), 20)
 
@@ -55,6 +61,7 @@ class testRectangle(unittest.TestCase):
         self.assertEqual(r5.area(), 1)
 
     def test_display(self):
+        """test display method"""
         r1 = Rectangle(1, 2)
         r2 = Rectangle(4, 3)
         r3 = Rectangle(2, 3, 2, 2)
@@ -77,6 +84,7 @@ class testRectangle(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), r4_expect_display)
 
     def test_print(self):
+        """test print method"""
         r1 = Rectangle(4, 6, 2, 1, 12)
         r1_expect_print = '[Rectangle] (12) 2/1 - 4/6\n'
         r2 = Rectangle(5, 5, 1)
@@ -89,6 +97,7 @@ class testRectangle(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), r2_expect_print)
 
     def test_update(self):
+        """ test update method"""
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(89)
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -117,6 +126,7 @@ class testRectangle(unittest.TestCase):
                              fake_out.getvalue())
 
     def test_update_kwargs(self):
+        """test update with kwargs"""
         r1 = Rectangle(10, 10, 10, 10)
         r1.update(height=1, id="sopas")
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -140,6 +150,7 @@ class testRectangle(unittest.TestCase):
                              fake_out.getvalue())
 
     def test_dictionary_representation(self):
+        """test dictionary represntation"""
         r1 = Rectangle(10, 2, 1, 9)
         self.assertEqual(r1.to_dictionary(), {
                          'x': 1, 'y': 9, 'id': 1, 'height': 2, 'width': 10})

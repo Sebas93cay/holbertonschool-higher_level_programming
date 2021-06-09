@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""This module has the test for the Square class"""
 from io import StringIO
 from models.square import Square
 from models.base import Base
@@ -8,12 +8,14 @@ from unittest.mock import patch
 
 
 class testSquare(unittest.TestCase):
+    """tests for the square class"""
     def setUp(self):
+        """set up for every test"""
         super().setUp()
         Base._Base__nb_objects = 0
 
     def test_init(self):
-        # test rectangles id's
+        """test squares id's"""
         r1 = Square(10, 2)
         self.assertEqual(r1.id, 1)
 
@@ -30,16 +32,19 @@ class testSquare(unittest.TestCase):
         self.assertEqual(r5.id, "monaco")
 
     def test_TypeErrors(self):
+        """test that should raise TypeErrors"""
         self.assertRaises(TypeError, Square, 4, "5")
         self.assertRaises(TypeError, Square, 6, 5, "foo")
         self.assertRaises(TypeError, Square, "6", 5, 10, "faa")
 
     def test_ValueErrors(self):
+        """test that should raise ValueErrors"""
         self.assertRaises(ValueError, Square, -4, 7)
         self.assertRaises(ValueError, Square, 6, 7, -1)
         self.assertRaises(ValueError, Square, 0, 6, 0, 1)
 
     def test_area(self):
+        """test area method"""
         r1 = Square(10, 2)
         self.assertEqual(r1.area(), 100)
 
@@ -56,6 +61,7 @@ class testSquare(unittest.TestCase):
         self.assertEqual(r5.area(), 1)
 
     def test_display(self):
+        """test display method"""
         r1 = Square(1, 2)
         r2 = Square(4, 3)
         r3 = Square(2, 3, 2)
@@ -78,6 +84,7 @@ class testSquare(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), r4_expect_display)
 
     def test_print(self):
+        """test print method"""
         r1 = Square(4, 1, 2, 12)
         r1_expect_print = '[Square] (12) 1/2 - 4\n'
         r2 = Square(5, 5, 1)
@@ -90,6 +97,7 @@ class testSquare(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), r2_expect_print)
 
     def test_update(self):
+        """test update method"""
         r1 = Square(10, 10, 10)
         r1.update(89)
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -118,6 +126,7 @@ class testSquare(unittest.TestCase):
                              fake_out.getvalue())
 
     def test_update_kwargs(self):
+        """test update with kwargs"""
         r1 = Square(10, 10, 10)
         r1.update(size=1, id="sopas")
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -136,6 +145,7 @@ class testSquare(unittest.TestCase):
                              fake_out.getvalue())
 
     def test_dictionary_representation(self):
+        """test dictionary represntation"""
         r1 = Square(10, 1, 9)
         self.assertEqual(r1.to_dictionary(), {
                          'x': 1, 'y': 9, 'id': 1, 'size': 10})
