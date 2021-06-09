@@ -33,20 +33,20 @@ class testBase(unittest.TestCase):
             "Found code style errors (and warnings)."
         )
 
-    # def test_init(self):
-    #     """
-    #     test init method
-    #     """
-    #     b1 = Base()
-    #     b2 = Base()
-    #     self.assertEqual(1, b1.id)
-    #     self.assertEqual(b2.id, 2)
-    #     b3 = Base()
-    #     b4 = Base(34)
-    #     b5 = Base()
-    #     self.assertEqual(b3.id, 3)
-    #     self.assertEqual(b4.id, 34)
-    #     self.assertEqual(b5.id, 4)
+    def test_init(self):
+        """
+        test init method
+        """
+        b1 = Base()
+        b2 = Base()
+        self.assertEqual(1, b1.id)
+        self.assertEqual(b2.id, 2)
+        b3 = Base()
+        b4 = Base(34)
+        b5 = Base()
+        self.assertEqual(b3.id, 3)
+        self.assertEqual(b4.id, 34)
+        self.assertEqual(b5.id, 4)
 
     def test_json_string(self):
         """
@@ -57,8 +57,7 @@ class testBase(unittest.TestCase):
         d_3 = {"uno": 1, "dos": 2}
         self.assertEqual(
             Base.to_json_string([d_r1, d_3]),
-            '[{"x": 0, "y": 0, "id": 908, "size": 8}, {"uno": 1, "dos": 2}]',
-        )
+            '[{"x": 0, "y": 0, "id": 908, "size": 8}, {"uno": 1, "dos": 2}]')
         self.assertEqual(Base.to_json_string(None), "[]")
 
     # def test_save_file(self):
