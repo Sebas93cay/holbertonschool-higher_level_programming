@@ -16,12 +16,23 @@ class testBase(unittest.TestCase):
         super().setUp()
         Base._Base__nb_objects = 0
 
-    def test_pep8(self):
-        """test pep8"""
-        style = pep8.StyleGuide(quit=True)
-        check = style.check_files(['models/base.py'])
-        self.assertEqual(check.total_errors, 0,
-                         "Found code style errors (and warnings).")
+    # def test_pep8(self):
+    #     """test pep8"""
+    #     style = pep8.StyleGuide(quit=True)
+    #     check = style.check_files(['models/base.py'])
+    #     self.assertEqual(check.total_errors, 0,
+    #                      "Found code style errors (and warnings).")
+
+    def test_pep8_base(self):
+        """
+        Test that checks PEP8
+        """
+        syntax = pep8.StyleGuide(quit=True)
+        check = syntax.check_files(['models/base.py'])
+        self.assertEqual(
+            check.total_errors, 0,
+            "Found code style errors (and warnings)."
+        )
 
     def test_init(self):
         """test init"""
