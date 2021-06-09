@@ -7,7 +7,6 @@ import unittest
 import os
 
 
-
 class testBase(unittest.TestCase):
     """test for base class"""
     def setUp(self):
@@ -17,7 +16,6 @@ class testBase(unittest.TestCase):
 
     def test_init(self):
         """test init"""
-        # test Base.__init__
         b1 = Base()
         b2 = Base()
         self.assertEqual(1, b1.id)
