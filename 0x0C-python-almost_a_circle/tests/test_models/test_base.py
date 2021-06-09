@@ -65,22 +65,22 @@ class testBase(unittest.TestCase):
         """
         test save file
         """
-        r1 = Rectangle(10, 7, 2, 8, "pollo")
-        r2 = Rectangle(2, 4, 0, 0, "pollo2")
+        r1 = Rectangle(10, 7, 2, 8, 235)
+        r2 = Rectangle(2, 4, 0, 0, 234)
         Rectangle.save_to_file([r1, r2])
         with open("Rectangle.json", mode="r", encoding="utf-8") as file:
             rectangle_file = file.read()
-        ex1 = '[{"x": 2, "y": 8, "id": "pollo", "width": 10, "height": 7}, '
-        ex2 = '{"x": 0, "y": 0, "id": "pollo2", "width": 2, "height": 4}]'
+        ex1 = '[{"x": 2, "y": 8, "id": 235, "width": 10, "height": 7}, '
+        ex2 = '{"x": 0, "y": 0, "id": 234, "width": 2, "height": 4}]'
         test = self.assertEqual(rectangle_file, ex1 + ex2)
         if test is None:
             os.remove("Rectangle.json")
-        r3 = Square(9, id="pollo3")
+        r3 = Square(9, id=56)
         r4 = Square(4, id=78)
         Square.save_to_file([r3, r4])
         with open("Square.json", mode="r", encoding="utf-8") as file:
             square_file = file.read()
-        ex1 = '[{"x": 0, "y": 0, "id": "pollo3", "size": 9}, '
+        ex1 = '[{"x": 0, "y": 0, "id": 56, "size": 9}, '
         ex2 = '{"x": 0, "y": 0, "id": 78, "size": 4}]'
         test = self.assertEqual(square_file, ex1 + ex2)
         if test is None:
