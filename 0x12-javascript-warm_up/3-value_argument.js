@@ -2,9 +2,7 @@
 
 const argv = require('process').argv;
 
-const numArg = argv.length;
-
-if (numArg === 2) {
+if (!argv[2]) {
   console.log('No argument');
 } else {
   for (const arg of argv.slice(2)) {
