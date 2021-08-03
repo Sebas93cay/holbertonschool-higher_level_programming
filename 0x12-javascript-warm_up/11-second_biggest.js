@@ -10,7 +10,7 @@ for (let n of argv.slice(2)) {
   if (n > biggest || isNaN(biggest)) {
     secondBiggest = biggest;
     biggest = n;
-  } else if (isNaN(secondBiggest) || (n > secondBiggest && n != biggest)) {
+  } else if (isNaN(secondBiggest) || (n > secondBiggest && n !== biggest)) {
     secondBiggest = n;
   }
 }
