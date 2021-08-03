@@ -2,9 +2,8 @@
 
 const argv = require('process').argv;
 
-
-const factorial = a => {
-  if (!a || isNaN(a) || a <= 0) {
+const factorial = function (a) {
+  if (!a || isNaN(a) || a <= 1) {
     return 1;
   }
   return a * factorial(a - 1);
