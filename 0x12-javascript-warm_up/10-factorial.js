@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const argv = require('process').argv;
+const { argv } = require('process');
 
 const factorial = function (a) {
   if (!a || isNaN(a) || a <= 1) {
