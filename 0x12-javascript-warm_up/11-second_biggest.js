@@ -5,7 +5,8 @@ const { argv } = require('process');
 let biggest = NaN;
 let secondBiggest = NaN;
 
-for (const n of argv.slice(2)) {
+for (let n of argv.slice(2)) {
+  n = parseInt(n);
   if (n > biggest || isNaN(biggest)) {
     secondBiggest = biggest;
     biggest = n;
