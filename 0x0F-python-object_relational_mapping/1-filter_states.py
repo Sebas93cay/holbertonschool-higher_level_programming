@@ -14,8 +14,6 @@ if __name__ == '__main__':
     ORDER BY states.id ASC"""
     try:
         cursor.execute(sql)
-        # cursor.execute("""SELECT * FROM states WHERE name LIKE 'N%'
-        # ORDER BY states.id ASC""")
         result = cursor.fetchall()
         for state in result:
             print(state)
