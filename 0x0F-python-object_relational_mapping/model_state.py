@@ -1,3 +1,6 @@
+"""
+This is the model of states
+"""
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
