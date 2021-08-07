@@ -20,3 +20,6 @@ if __name__ == '__main__':
         l = State(name='Louisiana')
         session.add(l)
         session.commit()
+        rl = session.query(State).filter(
+            State.name == 'Louisiana').order_by(State.id.desc()).first()
+        print(rl.id)
