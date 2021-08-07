@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module prints the state give as a parameter
+This module adds a new State to the table states
 """
 
 import sys
