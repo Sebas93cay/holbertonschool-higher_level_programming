@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+This module selects all states that match certain parameter
+"""
 import MySQLdb
 import sys
 
