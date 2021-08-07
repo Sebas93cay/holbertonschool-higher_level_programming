@@ -13,9 +13,9 @@ if __name__ == '__main__':
     sql = """SELECT * FROM states WHERE name LIKE 'N%'
     ORDER BY states.id ASC"""
     try:
-        cursor.execute(sql)
-        # cursor.execute("SELECT * FROM states WHERE name LIKE BINARY'N%' "
-        # "ORDER BY states.id DESC")
+        # cursor.execute(sql)
+        cursor.execute("""SELECT * FROM states WHERE name LIKE BINARY'N%'
+        ORDER BY states.id ASC""")
         result = cursor.fetchall()
         for state in result:
             print(state)
