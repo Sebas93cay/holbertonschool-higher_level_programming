@@ -20,4 +20,4 @@ if __name__ == '__main__':
         session = SessionMkr()
         cities = session.query(City, State).join(State).all()
         for c, s in cities:
-            print("{}: ({}) {}".format(c.name, c.id, s.name))
+            print("{}: ({}) {}".format(s.name, c.id, c.name))
