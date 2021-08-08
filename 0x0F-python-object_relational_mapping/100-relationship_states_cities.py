@@ -25,13 +25,13 @@ if __name__ == '__main__':
 
         # Create and add one state
         state = State(name=state_name)
-        session.add(state)
-        new_state = session.query(State).filter(
-            State.name == state_name).order_by(State.id.desc()).first()
+        # session.add(state)
+        # new_state = session.query(State).filter(
+        # State.name == state_name).order_by(State.id.desc()).first()
         # print(new_state)
 
         # Create and add one city
-        city = City(name=city_name, state_id=new_state.id)
+        city = City(name=city_name, state=state)
         session.add(city)
         # new_city = session.query(City).filter(City.name == city_name).one()
 
