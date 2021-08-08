@@ -19,7 +19,8 @@ class City(Base):
     state = relationship("State", back_populates="cities")
 
     def __repr__(self) -> str:
-        return "City {}: {} state_id:{}".format(self.id, self.name, self.state_id)
+        return "City {}: {} state_id:{}".format(self.id, self.name,
+                                                self.state_id)
 
 
 # State.cities = relationship(

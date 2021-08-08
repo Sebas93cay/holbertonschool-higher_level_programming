@@ -19,22 +19,8 @@ if __name__ == '__main__':
         Base.metadata.create_all(engine)
         SessionMkr = sessionmaker(bind=engine)
         session = SessionMkr()
-
-        state_name = 'California'
-        city_name = 'San Francisco'
-
-        # Create and add one state
-        state = State(name=state_name)
-        # session.add(state)
-        # new_state = session.query(State).filter(
-        # State.name == state_name).order_by(State.id.desc()).first()
-        # print(new_state)
-
-        # Create and add one city
-        city = City(name=city_name, state=state)
-        session.add(city)
-        # new_city = session.query(City).filter(City.name == city_name).one()
-
-        # Commit new City and State
-        session.commit()
-        session.close()
+        states = session.query(State).order_by(State.id).all()
+        for s in states:
+            print("{}: {}".format(s.id, s.name))
+            for c in s.cities:
+                print("\t{}: {}".format(c.id, c.name))

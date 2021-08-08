@@ -11,7 +11,9 @@ from sqlalchemy.orm import sessionmaker
 if __name__ == '__main__':
     if (len(sys.argv) == 5):
         user, password, database, state_name = (sys.argv[1],
-                                                sys.argv[2], sys.argv[3], sys.argv[4])
+                                                sys.argv[2],
+                                                sys.argv[3],
+                                                sys.argv[4])
         engine = create_engine(
             'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
                 user, password, database))
