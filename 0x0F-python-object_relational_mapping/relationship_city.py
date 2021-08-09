@@ -22,6 +22,5 @@ class City(Base):
         return "City {}: {} state_id:{}".format(self.id, self.name,
                                                 self.state_id)
 
-
-# State.cities = relationship(
-    # "City", order_by=City.id, back_populates="state")
+# State.cities = relationship("City", order_by=City.id, back_populates="state",
+        # cascade="all, delete, delete-orphan")

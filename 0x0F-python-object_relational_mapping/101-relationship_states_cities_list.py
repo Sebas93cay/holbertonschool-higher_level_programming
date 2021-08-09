@@ -16,7 +16,6 @@ if __name__ == '__main__':
         engine = create_engine(
             'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
                 user, password, database))
-        Base.metadata.create_all(engine)
         SessionMkr = sessionmaker(bind=engine)
         session = SessionMkr()
         states = session.query(State).order_by(State.id).all()
