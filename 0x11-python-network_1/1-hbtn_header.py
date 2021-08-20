@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-# This script that fetches
+# This script fetches a give url and prints its header X-Request-Id
 
 import urllib.request
 import sys
-with urllib.request.urlopen(sys.argv[1]) as response:
-    for header in response.getheaders():
-        if header[0] == 'X-Request-Id':
-            print(header[1])
-            break
+if __name__ == "__main__":
+    with urllib.request.urlopen(sys.argv[1]) as response:
+        print(dict(response.getheaders()).get('X-Request-Id'))
