@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-# This script fetches a give url and prints its header X-Request-Id
+"""
+This script fetches a give url and prints its header X-Request-Id
+"""
+
 
 import urllib.request
 import sys
