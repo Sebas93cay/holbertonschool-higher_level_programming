@@ -10,9 +10,10 @@ repo = sys.argv[1]
 user = sys.argv[2]
 
 
-r = requests.get(
-    "https://api.github.com/repos/{}/{}/commits".format(user, repo))
-l = r.json()[:10]
-for commit in l:
-    print("{}: {}".format(commit.get('sha'), commit.get(
-        'commit').get('author').get('name')))
+if __name__ == '__main__':
+    r = requests.get(
+        "https://api.github.com/repos/{}/{}/commits".format(user, repo))
+    l = r.json()[:10]
+    for commit in l:
+        print("{}: {}".format(commit.get('sha'), commit.get(
+            'commit').get('author').get('name')))
