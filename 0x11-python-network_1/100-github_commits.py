@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+"""
+list 10 commits (from the most recent to oldest) of the given repository
+"""
+
+import requests
+import sys
+
+repo = sys.argv[1]
+user = sys.argv[2]
+
+
+r = requests.get(
+    "https://api.github.com/repos/{}/{}/commits".format(user, repo))
+l = r.json()[:10]
+for commit in l:
+    print("{}: {}".format(commit.get('sha'), commit.get(
+        'commit').get('author').get('name')))
