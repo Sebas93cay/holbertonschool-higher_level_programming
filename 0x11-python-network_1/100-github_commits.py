@@ -13,7 +13,7 @@ user = sys.argv[2]
 if __name__ == '__main__':
     r = requests.get(
         "https://api.github.com/repos/{}/{}/commits".format(user, repo))
-    l = r.json()[:10]
-    for commit in l:
+    commits = r.json()[:10]
+    for commit in commits:
         print("{}: {}".format(commit.get('sha'), commit.get(
             'commit').get('author').get('name')))
