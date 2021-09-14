@@ -17,10 +17,6 @@ const main = async () => {
     });
   });
 
-  const totalCharacters = charactersUlrs.length;
-
-  console.log(totalCharacters);
-
   const names = [];
   for (const url of charactersUlrs) {
     const name = await new Promise((resolve, reject) => {
